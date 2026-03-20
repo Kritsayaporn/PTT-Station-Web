@@ -1065,10 +1065,71 @@ function showFloatingSos() {
 }
 
 function handleFloatingSosClick() {
-  // ส่งไปหน้า SOS modal
-  document.querySelector('.ni[data-nav="profile"]')?.click();
+  // ไปหน้า SOS
+  const profileBtn = Array.from(document.querySelectorAll('.ni')).find(el => el.textContent.includes('โปรไฟล์'));
+  if (profileBtn) profileBtn.click();
   // หรือเปิด SOS modal โดยตรง
-  openSOSModal();
+  if (typeof openSOSModal === 'function') {
+    openSOSModal();
+  }
+}
+
+// ★ DRAGGABLE FLOATING SOS BUTTON
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let startBtnX = 0;
+let startBtnY = 0;
+
+const floatingSosBtn = document.getElementById('floatingSosBtn');
+
+if (floatingSosBtn) {
+  // Mouse events
+  floatingSosBtn.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch events
+  floatingSosBtn.addEventListener('touchstart', startDrag);
+  document.addEventListener('touchmove', drag);
+  document.addEventListener('touchend', endDrag);
+}
+
+function startDrag(e) {
+  isDragging = true;
+  startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  startY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+  
+  const rect = floatingSosBtn.getBoundingClientRect();
+  startBtnX = rect.right - window.innerWidth;
+  startBtnY = rect.bottom - window.innerHeight;
+  
+  floatingSosBtn.style.animation = 'none';
+}
+
+function drag(e) {
+  if (!isDragging) return;
+  
+  const currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  const currentY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+  
+  const deltaX = currentX - startX;
+  const deltaY = currentY - startY;
+  
+  let newRight = startBtnX - deltaX;
+  let newBottom = startBtnY - deltaY;
+  
+  // ขอบเขต: ให้อยู่ในจอ
+  newRight = Math.max(-30, Math.min(newRight, 30));
+  newBottom = Math.max(-30, Math.min(newBottom, 30));
+  
+  floatingSosBtn.style.right = newRight + 'px';
+  floatingSosBtn.style.bottom = newBottom + 'px';
+}
+
+function endDrag() {
+  isDragging = false;
+  floatingSosBtn.style.animation = 'floatBounce 3s ease-in-out infinite';
 }
 
 // เช็ค localStorage เมื่อโหลดหน้า
