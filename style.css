@@ -13,7 +13,7 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);min-height:100vh;heig
 /* Desktop centering */
 @media(min-width:600px){
   body{background:radial-gradient(ellipse at 30% 20%,#0D2050 0%,#060C1A 45%,#020810 100%);align-items:center;justify-content:center;}
-  .phone{border-radius:0;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 64px rgba(0,0,0,.5);max-height:100dvh;border-radius:20px;}
+  .phone{border-radius:0;box-shadow:none;max-height:100dvh;border-radius:20px;}
   body::before{content:'PTT STATION';position:fixed;top:24px;left:32px;font-family:'Prompt',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:2px;}
 }
 .phone{width:100%;max-width:430px;background:linear-gradient(45deg, #060C1A 0%, #0D2050 25%, #0A2558 50%, #0D2050 75%, #060C1A 100%);background-size:400% 400%;flex:1;height:100dvh;display:flex;flex-direction:column;overflow:hidden;position:relative;animation:colorWave 12s ease-in-out infinite;}
@@ -111,11 +111,12 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);min-height:100vh;heig
 .pri-btn{width:100%;background:linear-gradient(135deg,#1B5DC9,#0D2E6B);color:#fff;border:none;border-radius:var(--r-sm);padding:12px;font-family:'Prompt',sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 6px 24px rgba(27,93,201,.4);transition:transform .15s;margin-top:10px;}
 .pri-btn:hover{transform:scale(1.02);}
 .sec-btn{width:100%;background:var(--surface2);border:none;border-radius:var(--r-sm);padding:10px;font-size:12px;color:var(--text2);cursor:pointer;margin-top:6px;}
-/* ★ FLOATING SOS BUTTON - ลอยอยู่บนจอ */
-.floating-sos-btn{position:fixed;bottom:120px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#E8192C,#900010);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 28px rgba(232,25,44,.7);cursor:pointer;transition:all .3s ease;z-index:150;border:none;color:#fff;animation:floatBounce 3s ease-in-out infinite;}
+/* ★ FLOATING SOS BUTTON - ลอยอยู่บนจอ + สามารถลากได้ */
+.floating-sos-btn{position:fixed;bottom:120px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#E8192C,#900010);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 28px rgba(232,25,44,.7);cursor:grab;transition:box-shadow .3s ease;z-index:150;border:none;color:#fff;animation:floatBounce 3s ease-in-out infinite;touch-action:none;}
+.floating-sos-btn:active{cursor:grabbing;box-shadow:0 12px 36px rgba(232,25,44,.9);}
 .floating-sos-btn:hover{transform:scale(1.12);box-shadow:0 12px 36px rgba(232,25,44,.9);}
 .floating-sos-btn.hidden{display:none;}
-.floating-sos-close{position:absolute;top:-10px;right:-10px;width:32px;height:32px;background:#fff;border:3px solid #E8192C;border-radius:50%;color:#E8192C;font-size:20px;font-weight:bold;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(0,0,0,.3);}
+.floating-sos-close{position:absolute;top:-10px;right:-10px;width:32px;height:32px;background:#fff;border:3px solid #E8192C;border-radius:50%;color:#E8192C;font-size:20px;font-weight:bold;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(0,0,0,.3);z-index:151;}
 .floating-sos-close:hover{background:#E8192C;color:#fff;transform:rotate(90deg);}
 @keyframes floatBounce{0%,100%{transform:translateY(0px);} 50%{transform:translateY(-12px);}}
 
