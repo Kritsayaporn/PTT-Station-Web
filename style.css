@@ -111,13 +111,22 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);min-height:100vh;heig
 .pri-btn{width:100%;background:linear-gradient(135deg,#1B5DC9,#0D2E6B);color:#fff;border:none;border-radius:var(--r-sm);padding:12px;font-family:'Prompt',sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 6px 24px rgba(27,93,201,.4);transition:transform .15s;margin-top:10px;}
 .pri-btn:hover{transform:scale(1.02);}
 .sec-btn{width:100%;background:var(--surface2);border:none;border-radius:var(--r-sm);padding:10px;font-size:12px;color:var(--text2);cursor:pointer;margin-top:6px;}
+/* ★ FLOATING SOS BUTTON - ลอยอยู่บนจอ */
+.floating-sos-btn{position:fixed;bottom:120px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#E8192C,#900010);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 28px rgba(232,25,44,.7);cursor:pointer;transition:all .3s ease;z-index:150;border:none;color:#fff;animation:floatBounce 3s ease-in-out infinite;}
+.floating-sos-btn:hover{transform:scale(1.12);box-shadow:0 12px 36px rgba(232,25,44,.9);}
+.floating-sos-btn.hidden{display:none;}
+.floating-sos-close{position:absolute;top:-10px;right:-10px;width:32px;height:32px;background:#fff;border:3px solid #E8192C;border-radius:50%;color:#E8192C;font-size:20px;font-weight:bold;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(0,0,0,.3);}
+.floating-sos-close:hover{background:#E8192C;color:#fff;transform:rotate(90deg);}
+@keyframes floatBounce{0%,100%{transform:translateY(0px);} 50%{transform:translateY(-12px);}}
+
 .nav{background:rgba(7,8,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(99,102,241,.2);padding:8px 0 max(22px,env(safe-area-inset-bottom,16px));display:flex;justify-content:space-around;align-items:center;flex-shrink:0;z-index:100;}
 [data-theme="light"] .nav{background:rgba(240,242,255,.92);border-top:1px solid rgba(99,102,241,.2);}
 .ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:5px 12px;border-radius:14px;transition:background .15s;}
 .ni:hover{background:var(--surface2);}
 .ni .nicon{font-size:20px;}.ni .nlbl{font-size:9px;font-weight:600;color:var(--text2);}
 .ni.on .nlbl{color:var(--p500);font-weight:800;}
-.nav-sos-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:-16px;cursor:pointer;}
+/* ★ ลบ SOS ออกจากแถบบาร์ */
+.nav-sos-wrap{display:none !important;}
 .nav-sos-btn{width:52px;height:52px;background:linear-gradient(135deg,#E8192C,#900010);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 6px 24px rgba(232,25,44,.5);transition:transform .15s;}
 .nav-sos-btn:hover{transform:scale(1.07);}
 #leaflet-map{height:100%;border-bottom:2px solid var(--border);min-height:160px;}
@@ -417,4 +426,34 @@ button:focus-visible{outline:2px solid var(--p500);outline-offset:2px;}
 
 .icon-card:hover .icon {
   transform: scale(1.1);
+}
+
+/* Map button */
+#map-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1B5DC9, #0D2E6B);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(27, 93, 201, 0.45);
+  z-index: 500;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#map-toggle:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 12px 48px rgba(27, 93, 201, 0.55);
+}
+
+#map-toggle:active {
+  transform: translateY(-2px) scale(0.98);
 }
