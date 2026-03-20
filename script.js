@@ -1065,12 +1065,13 @@ function showFloatingSos() {
 }
 
 function handleFloatingSosClick() {
-  // ไปหน้า SOS
-  const profileBtn = Array.from(document.querySelectorAll('.ni')).find(el => el.textContent.includes('โปรไฟล์'));
-  if (profileBtn) profileBtn.click();
-  // หรือเปิด SOS modal โดยตรง
-  if (typeof openSOSModal === 'function') {
-    openSOSModal();
+  // ไปหน้า SOS - เรียกฟังก์ชัน openSOS()
+  if (typeof openSOS === 'function') {
+    openSOS();
+  } else {
+    // fallback: ค้นหา nav-sos-wrap และกดให้
+    const sosBtnWrap = document.querySelector('.nav-sos-wrap');
+    if (sosBtnWrap) sosBtnWrap.click();
   }
 }
 
