@@ -1050,11 +1050,37 @@ function addToCalendar(bookingId){
   });
 }
 
-document.getElementById('map-toggle').addEventListener('click', function() {
-  const mapView = document.getElementById('v-map');
-  if (mapView) {
-    mapView.classList.add('active');
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    mapView.scrollIntoView({ behavior: 'smooth' });
+// ★ FLOATING SOS BUTTON FUNCTIONS ★
+function hideFloatingSos() {
+  const btn = document.getElementById('floatingSosBtn');
+  btn.classList.add('hidden');
+  // บันทึกลง localStorage ว่าปิด SOS แล้ว
+  localStorage.setItem('sosBtnHidden', 'true');
+}
+
+function showFloatingSos() {
+  const btn = document.getElementById('floatingSosBtn');
+  btn.classList.remove('hidden');
+  localStorage.removeItem('sosBtnHidden');
+}
+
+function handleFloatingSosClick() {
+  // ส่งไปหน้า SOS modal
+  document.querySelector('.ni[data-nav="profile"]')?.click();
+  // หรือเปิด SOS modal โดยตรง
+  openSOSModal();
+}
+
+// เช็ค localStorage เมื่อโหลดหน้า
+// ★ เมื่อ page refresh → ลบค่า localStorage ให้ SOS button กลับมาแสดง
+document.addEventListener('DOMContentLoaded', function() {
+  // รีเซ็ต localStorage เมื่อ page reload
+  localStorage.removeItem('sosBtnHidden');
+  // เสมอแสดง floating SOS button
+  const btn = document.getElementById('floatingSosBtn');
+  if (btn) {
+    btn.classList.remove('hidden');
   }
 });
+
+// ★ ลบ map-toggle event listener ออก
